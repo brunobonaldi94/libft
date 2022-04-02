@@ -1,1 +1,4 @@
-/test
+.vscode
+*.o
+*.a
+/test/test

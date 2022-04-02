@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 03:40:53 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/02 01:06:32 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/02 01:09:17 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef TEST_H
+# define TEST_H
 
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}
+# include <criterion/criterion.h>
+# include <ctype.h>
+# include "../libft.h"
+# include <stdio.h>
+
+#endif
