@@ -36,28 +36,33 @@ void	run_test_ctype_char(char *string_test, int (*result_function)(int),
 	}
 }
 
-void	run_test_ctype_string(char **string_test, size_t (*result_function)(const char *),
-						size_t (*expected_function)(const char *))
+char	*create_ascii_arr()
 {
-	int	result;
-	int	expected;
+	char c;
+	int	i;
+	int	ascii_count = 127; 
+	char *tests_values;
 
-	while(*string_test)
+	c = 0;
+	i = 0;
+	tests_values = (char *)malloc(sizeof(char) * (ascii_count + 1));
+	if (!tests_values)
+		return (NULL);
+	while (i < ascii_count)
 	{
-		result = result_function(*string_test);
-		expected = expected_function(*string_test);
-		cr_expect(result == expected,
-			"arg value: %s, result:%d != expect:%d",
-			*string_test, result, expected);
-		string_test++;
+		tests_values[i] = c;
+		i++;
+		c++;
 	}
+	tests_values[i] = '\0';
+	return (tests_values);
 }
 
 Test(test_ctype, ft_isalpha_test)
 {
 	char *tests_values;
 
-	tests_values = "DNAKLDLAK 12DNAK 3\n\t";
+	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isalpha, &isalpha);
 }
 
@@ -65,7 +70,7 @@ Test(test_ctype, ft_isdigit_test)
 {
 	char *tests_values;
 
-	tests_values = "DNAKLDLA313131r532K 12DNAK 3\n\t";
+	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isdigit, &isdigit);
 }
 
@@ -73,7 +78,7 @@ Test(test_ctype, ft_isascii_test)
 {
 	char *tests_values;
 
-	tests_values = "DNAKLDLA313131r532K 12DNAK 3\n\t";
+	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isascii, &isascii);
 }
 
@@ -81,13 +86,7 @@ Test(test_ctype, ft_isprint_test)
 {
 	char *tests_values;
 
-	tests_values = "DNAKLDLA313131r532K 12DNAK 3\n\t";
+	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isprint, &isprint);
 }
 
-Test(test_ctype, ft_strlen_test)
-{
-	char *tests_values[] = {"DNAKLDLA313131r532K 12DNAK 3\n\t"
-	, "dmakd", "qwsx \tvwq", "MAKLMCAS", "ASDNAS", NULL};
-	run_test_ctype_string(tests_values, &ft_strlen, &strlen);
-}

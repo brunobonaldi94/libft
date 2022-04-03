@@ -7,8 +7,13 @@ SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		calloc.c strdup.c
 
 OBJS = $(SRCS:.c=.o)
-TEST_PATH = ./test
-TEST = $(TEST_PATH)/test.c
+
+TEST_PATH = ./test/
+TEST_FILES = test_ctype.c test_string.c
+TEST_SRCS = $(addprefix $(TEST_PATH), $(TEST_FILES))
+TEST_OBJS = $(TEST_SRCS:.c=.o)
+
+TEST =  $(addprefix $(TEST_PATH), test_result) 
 
 NAME = libft.a
 INCLUDES = ./
@@ -29,21 +34,29 @@ $(NAME):	$(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	$(RANLIB) $(NAME)
 
-run_test:	$(NAME)
-	$(CC) $(CFLAGS) $(TEST) $(NAME) -o $(basename $(TEST)) -lcriterion
+run_test:	$(TEST)
 	./$(basename $(TEST))
+
+$(TEST):	$(TEST_OBJS)
+	$(CC) $(CFLAGS) $(TEST_OBJS) $(NAME) -o $(basename $(TEST)) -lcriterion
+
+clean_test:
+	$(RM) $(TEST_OBJS)
+
+fclean_test:
+	$(RM) $(TEST)
+
 
 show_ignored:
 	@git ls-files -io --exclude-standard
 
-clean:
-	$(RM) $(OBJS)
-	$(RM) $(subst .c,, $(TEST))
 
-fclean:	clean
+clean: clean_test
+	$(RM) $(OBJS)
+
+fclean:	clean clean_test fclean_test
 	$(RM) $(NAME)
 
 re:	fclean all
-
 
 .PHONY:	all clean fclean re
