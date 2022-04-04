@@ -43,7 +43,7 @@ char	*create_ascii_arr()
 	int	ascii_count = 127; 
 	char *tests_values;
 
-	c = 0;
+	c = 1;
 	i = 0;
 	tests_values = (char *)malloc(sizeof(char) * (ascii_count + 1));
 	if (!tests_values)

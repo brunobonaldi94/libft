@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 16:19:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/03 17:59:37 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/03 22:59:47 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,12 @@ Test(test_ctype, ft_strlen_test)
 	// char *tests_values[] = {"DNAKLDLA313131r532K 12DNAK 3\n\t"
 	// , "dmakd", "qwsx \tvwq", "MAKLMCAS", "ASDNAS", NULL};
     char **tests_values = random_string_generator(5);
-    int i = 0;
-    while (tests_values[i])
-    {
-        printf("%s\n",tests_values[i]);
-        i++;
-    }
+    // int i = 0;
+    // while (tests_values[i])
+    // {
+    //     printf("%s\n",tests_values[i]);
+    //     i++;
+    // }
         
 	run_test_ctype_string(tests_values, &ft_strlen, &strlen);
 }
