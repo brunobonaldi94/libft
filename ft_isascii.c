@@ -6,9 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 04:12:56 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/02 01:09:05 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/04 19:12:02 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 int	ft_isascii(int c)
 {

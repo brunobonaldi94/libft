@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 16:19:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/03 22:59:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/04 18:47:41 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int generate_random_int(int min, int max, int seed)
     int random_nbr;
 
     srandom(seed * random());
-    random_nbr = min + (random() % (max - min +1));
+    random_nbr = (min + (random() % (max - min +1)));
     return (random_nbr);
 }
 
@@ -45,7 +45,7 @@ void    populate_random_string(char *str, int desired_len)
     index = 0;
     while (index < desired_len)
     {
-        str[index] =  (char)generate_random_int(32,126,random());
+        str[index] =  (char)generate_random_int(1,126,random());
         index++;
     }
     str[index] = '\0';
@@ -63,7 +63,7 @@ char    **random_string_generator(int qty)
     while (index < qty)
     {
         random_value = generate_random_int(1,100, index);
-        test_values[index] = (char *)malloc(sizeof(char *) * (random_value +1));
+        test_values[index] = (char *)malloc(sizeof(char *) * (random_value + 1));
         populate_random_string(test_values[index], random_value);
         index++;
     }
@@ -71,19 +71,8 @@ char    **random_string_generator(int qty)
     return (test_values);
 }
 
-
-
 Test(test_ctype, ft_strlen_test)
 {
-	// char *tests_values[] = {"DNAKLDLA313131r532K 12DNAK 3\n\t"
-	// , "dmakd", "qwsx \tvwq", "MAKLMCAS", "ASDNAS", NULL};
-    char **tests_values = random_string_generator(5);
-    // int i = 0;
-    // while (tests_values[i])
-    // {
-    //     printf("%s\n",tests_values[i]);
-    //     i++;
-    // }
-        
+	char **tests_values = random_string_generator(5);   
 	run_test_ctype_string(tests_values, &ft_strlen, &strlen);
 }

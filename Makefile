@@ -1,10 +1,10 @@
 SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-		ft_strlen.c 
-		#ft_tolower.c \
-		ft_strchr.c  ft_strrchr.c ft_strncmp.c \
+		ft_strlen.c ft_toupper.c ft_tolower.c
+		#strdup.c \
+		ft_strrchr.c ft_strncmp.c \
 		ft_memset.c ft_bzero.c ft_memchr.c ft_memcpy.c ft_memcmp.c \
 		ft_memmove.c ft_strnstr.c ft_strlcpy.c ft_strlcat.c ft_atoi.c \
-		calloc.c strdup.c
+		calloc.c
 
 OBJS = $(SRCS:.c=.o)
 
@@ -33,7 +33,8 @@ all:	$(NAME) run_test
 $(NAME):	$(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	$(RANLIB) $(NAME)
-
+####################################################
+##TEST##
 run_test:	$(TEST)
 	./$(basename $(TEST))
 
@@ -46,10 +47,12 @@ clean_test:
 fclean_test:
 	$(RM) $(TEST)
 
-
 show_ignored:
 	@git ls-files -io --exclude-standard
 
+norminette:
+	norminette $(SRCS) libft.h
+####################################################
 
 clean: clean_test
 	$(RM) $(OBJS)

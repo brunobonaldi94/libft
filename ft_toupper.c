@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 01:38:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/04 19:18:53 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/04 18:25:15 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/04 19:19:34 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isprint(int c)
+int	ft_toupper(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (e_isprint);
-	return (0);
+	int	to_upper_constant;
+
+	to_upper_constant = 'a' - 'A';
+	if (c >= 'a' && c <= 'z')
+		c -= to_upper_constant;
+	return (c);
 }

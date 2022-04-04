@@ -21,14 +21,7 @@ void	run_test_ctype_char(char *string_test, int (*result_function)(int),
 	while (*string_test)
 	{
 		result = result_function(*string_test);
-		if ((expected_function(*string_test) == 0))
-		{
-			expected = 0;
-		}
-		else
-		{
-			expected = 1;
-		}
+		expected = expected_function(*string_test);
 		cr_expect(result == expected,
 			"arg value: %c, result:%d != expect:%d",
 			*string_test, result, expected);
@@ -90,3 +83,18 @@ Test(test_ctype, ft_isprint_test)
 	run_test_ctype_char(tests_values, &ft_isprint, &isprint);
 }
 
+Test(test_ctype, ft_to_upper_test)
+{
+	char *tests_values;
+
+	tests_values = create_ascii_arr();
+	run_test_ctype_char(tests_values, &ft_toupper, &toupper);
+}
+
+Test(test_ctype, ft_to_lower_test)
+{
+	char *tests_values;
+
+	tests_values = create_ascii_arr();
+	run_test_ctype_char(tests_values, &ft_tolower, &tolower);
+}
