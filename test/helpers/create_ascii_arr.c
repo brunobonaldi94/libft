@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   create_ascii_arr.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/05 23:26:26 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/05 21:30:35 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/05 21:49:00 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-#define TEST_H
+#include "test.h"
 
-# define TEST_STRING_QTY 10
-# define ADDER_STRING 10
-#include <criterion/criterion.h>
-#include <signal.h>
-#include <ctype.h>
-#include "../libft.h"
-//#include <string.h>
-#include <bsd/string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+char	*create_ascii_arr()
+{
+	char c;
+	int	i;
+	int	ascii_count = 127; 
+	char *tests_values;
 
-char	*create_ascii_arr();
-char    **random_string_generator(int qty);
-void	free_string_generator(char **test_values);
-
-#endif
+	c = 1;
+	i = 0;
+	tests_values = (char *)malloc(sizeof(char) * (ascii_count + 1));
+	if (!tests_values)
+		return (NULL);
+	while (i < ascii_count)
+	{
+		tests_values[i] = c;
+		i++;
+		c++;
+	}
+	tests_values[i] = '\0';
+	return (tests_values);
+}

@@ -17,38 +17,17 @@ void	run_test_ctype_char(char *string_test, int (*result_function)(int),
 {
 	int	result;
 	int	expected;
+	int index = 0;
 
-	while (*string_test)
+	while (string_test[index])
 	{
-		result = result_function(*string_test);
-		expected = expected_function(*string_test);
+		result = result_function(string_test[index]);
+		expected = expected_function(string_test[index]);
 		cr_expect(result == expected,
 			"arg value: %c, result:%d != expect:%d",
-			*string_test, result, expected);
-		string_test++;
+			string_test[index], result, expected);
+		index++;
 	}
-}
-
-char	*create_ascii_arr()
-{
-	char c;
-	int	i;
-	int	ascii_count = 127; 
-	char *tests_values;
-
-	c = 1;
-	i = 0;
-	tests_values = (char *)malloc(sizeof(char) * (ascii_count + 1));
-	if (!tests_values)
-		return (NULL);
-	while (i < ascii_count)
-	{
-		tests_values[i] = c;
-		i++;
-		c++;
-	}
-	tests_values[i] = '\0';
-	return (tests_values);
 }
 
 Test(test_ctype, ft_isalpha_test)
@@ -57,6 +36,7 @@ Test(test_ctype, ft_isalpha_test)
 
 	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isalpha, &isalpha);
+	free(tests_values);
 }
 
 Test(test_ctype, ft_isdigit_test)
@@ -65,6 +45,7 @@ Test(test_ctype, ft_isdigit_test)
 
 	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isdigit, &isdigit);
+	free(tests_values);
 }
 
 Test(test_ctype, ft_isascii_test)
@@ -73,6 +54,7 @@ Test(test_ctype, ft_isascii_test)
 
 	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isascii, &isascii);
+	free(tests_values);
 }
 
 Test(test_ctype, ft_isprint_test)
@@ -81,6 +63,7 @@ Test(test_ctype, ft_isprint_test)
 
 	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_isprint, &isprint);
+	free(tests_values);
 }
 
 Test(test_ctype, ft_to_upper_test)
@@ -89,6 +72,7 @@ Test(test_ctype, ft_to_upper_test)
 
 	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_toupper, &toupper);
+	free(tests_values);
 }
 
 Test(test_ctype, ft_to_lower_test)
@@ -97,4 +81,5 @@ Test(test_ctype, ft_to_lower_test)
 
 	tests_values = create_ascii_arr();
 	run_test_ctype_char(tests_values, &ft_tolower, &tolower);
+	free(tests_values);
 }
