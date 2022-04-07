@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 03:14:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/05 23:08:43 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/06 23:08:03 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 # define LIBFT_H
 
 # include <stdlib.h> 
-
-enum
-{
-	e_isalnum = 8,
-	e_isalpha = 1024,
-	e_isdigit = 2048,
-	e_isprint = 16384
-};
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -36,5 +28,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *s1, const char *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *nptr);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 #endif

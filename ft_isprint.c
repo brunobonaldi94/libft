@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 01:38:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/04 19:18:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:45:33 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_isprint(int c)
 {
 	if (c >= 32 && c <= 126)
-		return (e_isprint);
+		return (1);
 	return (0);
 }

@@ -1,10 +1,9 @@
-SRCS =	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
+SRCS = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 		ft_strlen.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c \
-		ft_strncmp.c ft_strnstr.c
+		ft_strncmp.c ft_strnstr.c ft_atoi.c ft_strlcpy.c ft_strlcat.c 
 		#strdup.c \
-		 ft_strncmp.c \
 		ft_memset.c ft_bzero.c ft_memchr.c ft_memcpy.c ft_memcmp.c \
-		ft_memmove.c  ft_strlcpy.c ft_strlcat.c ft_atoi.c \
+		ft_memmove.c   \
 		calloc.c
 
 OBJS = $(SRCS:.c=.o)
@@ -13,12 +12,12 @@ OBJS = $(SRCS:.c=.o)
 INCLUDES_TEST = $(addprefix $(HELPERS_PATH), includes)
 
 TEST_PATH = test/
-TEST_FILES = test_ctype.c test_string.c
+TEST_FILES = test_ctype.c test_string.c test_stdlib.c
 TEST_SRCS = $(addprefix $(TEST_PATH), $(TEST_FILES))
 TEST_OBJS = $(TEST_SRCS:.c=.o)
 TEST =  $(addprefix $(TEST_PATH), test_result) 
 HELPERS_PATH = test/helpers/
-HELPERS_SRCS = $(addprefix $(HELPERS_PATH), create_ascii_arr.c string_generator.c)
+HELPERS_SRCS = $(addprefix $(HELPERS_PATH), create_ascii_arr.c string_generator.c transform_to_one.c)
 HELPERS_OBJS = $(HELPERS_SRCS:.c=.o)
 
 #TEST =  $(addprefix $(HELPERS_PATH), helpers) 
@@ -51,7 +50,7 @@ $(HELPERS_PATH)%.o:	$(HELPERS_PATH)%.c
 	$(CC) $(CFLAGS) -c -I./$(TEST_PATH) $< -o $(<:%.c=%.o)
 
 $(TEST):	$(TEST_OBJS) $(HELPERS_OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(HELPERS_OBJS) $(NAME) -o $(basename $(TEST)) -lcriterion
+	$(CC) $(CFLAGS) $(TEST_OBJS) $(HELPERS_OBJS) $(NAME) -o $(basename $(TEST)) -lcriterion -lbsd
 
 
 clean_test:

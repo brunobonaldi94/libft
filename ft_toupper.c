@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 18:25:15 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/04 19:19:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:11:09 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int	ft_toupper(int c)
 {
 	int	to_upper_constant;
 
-	to_upper_constant = 'a' - 'A';
-	if (c >= 'a' && c <= 'z')
+	to_upper_constant = 32;
+	if (ft_isalpha(c) == 2)
 		c -= to_upper_constant;
 	return (c);
 }

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 19:03:22 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/05 23:30:13 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/06 17:46:59 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,5 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	s1_char = (unsigned char)*s1;
 	s2_char = (unsigned char)*s2;
-	if ((s1_char - s2_char) > 0)
-		return (1);
-	else if ((s1_char - s2_char)  < 0)
-		return (-1);
-	return (0);
-
+	return (s1_char - s2_char);
 }

@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/02 03:40:53 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/04 19:12:02 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:45:18 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
-		return (e_isdigit);
+		return (1);
 	return (0);
 }
