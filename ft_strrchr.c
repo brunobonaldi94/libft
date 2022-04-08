@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 23:47:10 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/06 17:59:59 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/08 19:29:52 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*ft_strrchr(const char *s, int c)
 
 	s_len = ft_strlen(s);
 	ptr_s = s + s_len;
-	while (ptr_s != s && s != NULL)
+	while (s != NULL && ptr_s - s >= 0)
 	{
 		if (*ptr_s == c)
 			return ((char *)ptr_s);

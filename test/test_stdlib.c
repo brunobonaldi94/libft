@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 19:30:27 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/06 19:49:54 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/08 19:29:23 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,23 @@ Test(test_stdlib, ft_atoi_test)
         );
         i++;
     }
+}
+
+Test(test_stdlib, ft_calloc_test)
+{
+    void *p = ft_calloc(2,2);
+    void *e = calloc(2,2);
+
+    cr_expect(ft_memcmp(p,e, 4) == 0, "%d | %ld | %ld",ft_memcmp(p, e, 4) , sizeof(p) /sizeof(p[0]), sizeof(e) / sizeof(e[0]));
+    free(p);
+    free(e);
+    void *p1= ft_calloc(4, 4);
+    void *e1= calloc(4, 4);
+    cr_expect(memcmp(p1, e1, 16) == 0);
+    free(p1);
+    free(e1);
+    void *p2= ft_calloc(2, 2);
+    char e2[] = {0,0,0,1};
+    cr_expect(memcmp(p2, e2, 4) != 0);
+    free(p2);
 }

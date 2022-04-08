@@ -6,11 +6,26 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 16:19:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/07 23:30:50 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/08 19:24:01 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
+
+
+int	my_strcmp(char *s1, char *s2)
+{
+	if (s1 == NULL && s2 == NULL)
+		return (0);
+	if ((s1 == NULL && s2 != NULL) || (s2 == NULL && s1 != NULL))
+		return (-1);
+	while (*s1 && *s2 && (*s1 == *s2))
+	{
+		s1++;
+		s2++;
+	}
+	return (unsigned char)*s1 - (unsigned char)*s2;
+}
 
 void	run_test_string_string(char **string_test, size_t (*result_function)(const char *),
 						size_t (*expected_function)(const char *))
@@ -39,20 +54,22 @@ void	run_test_string_strchr(char **string_test,  char  *find_c, char *(*result_f
 	int index;
 
 	index = 0;
+    char *start = find_c;
 	while (string_test[index])
 	{
+        find_c = start;
 		while(*find_c)
 		{
 			result = result_function(string_test[index], *find_c);
 			expected = expected_function(string_test[index], *find_c);
-			cr_expect(result == expected,
+			cr_expect(my_strcmp(result, expected) == 0,
 				"arg value: %s, should_find: %c , result:%d != expect:%d",
 				*string_test, *find_c, result, expected);
 			find_c++;
 		}
-		string_test++;
+		index++;
 	}
-	cr_expect(result == expected,
+	cr_expect(my_strcmp(result, expected) == 0,
 			"arg value: %s, should_find: %c , result:%d != expect:%d",
 			string_test[index], '\0', result, expected);
 }
@@ -118,19 +135,7 @@ Test(test_string, ft_strncmp_test)
 }
 
 
-int	my_strcmp(char *s1, char *s2)
-{
-	if (s1 == NULL && s2 == NULL)
-		return (0);
-	if ((s1 == NULL && s2 != NULL) || (s2 == NULL && s1 != NULL))
-		return (-1);
-	while (*s1 && *s2 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (unsigned char)*s1 - (unsigned char)*s2;
-}
+
 
 Test(test_string, ft_strnstr_test)
 {
@@ -251,20 +256,6 @@ Test(test_string, ft_strdup_test)
 	free_string_generator(src);
 }
 
-int	compare_mem(void *s, void *d, int size)
-{
-	while (size && *(unsigned char*)s==*(unsigned char*)d)
-	{
-		//printf("%c | %c", *(unsigned char *)s, *(unsigned char *)d);
-		s++;
-		d++;
-		size--;
-	}
-	if (size <= 0)
-		return (1);
-	return (0);
-}
-
 Test(test_string, ft_memset)
 {
 	char **src = random_string_generator(TEST_STRING_QTY);
@@ -277,7 +268,7 @@ Test(test_string, ft_memset)
  		ft_memset(cp_src, c , n);
 		void *cp_src2 = strdup(src[i]);
 		memset(cp_src2, c, n);
-		cr_expect(compare_mem(cp_src,cp_src2, strlen(src[i])) == 0,"i=%d\nsrc=%.*s\nresult=%.*s\nexpected=%s\n",i, src[i], cp_src, cp_src2);
+		cr_expect(ft_memcmp(cp_src,cp_src2, strlen(cp_src2)) == 0,"i=%d\nsrc=%.*s\nresult=%.*s\nexpected=%s\n",i, src[i], cp_src, cp_src2);
 		i++;
 		free(cp_src);
 		free(cp_src2);
@@ -292,13 +283,15 @@ Test(test_string, ft_bzero)
 	while (src[i])
 	{
 		void *cp_src = strdup(src[i]);
-		ft_bzero(cp_src, (size_t)generate_random_int(1,strlen(src[i]),i));
 		void *cp_src2 = strdup(src[i]);
-		bzero(cp_src2, (size_t)generate_random_int(1,strlen(src[i]),i));
-		cr_expect(compare_mem(cp_src,cp_src2, strlen(src[i])) == 0,"i=%d\nsrc=%.*s\nresult=%.*s\nexpected=%s\n",i, src[i], cp_src, cp_src2);
+        void *cp_src3 = strdup(src[i]);
+		ft_bzero(cp_src, (size_t)generate_random_int(1,20,i));
+		bzero(cp_src2, (size_t)generate_random_int(1,20,i));
+		cr_expect(ft_memcmp(cp_src,cp_src2, strlen(cp_src)) == 0,"i=%d\nsrc=%s\nresult=%.*s\nexpected=%.*s\n",i, cp_src3, cp_src, cp_src2);
 		i++;
 		free(cp_src);
 		free(cp_src2);
+        free(cp_src3);
 	}
 	free_string_generator(src);
 }
@@ -336,4 +329,55 @@ Test(test_string, ft_memmove)
 }
 
 
+void	run_test_string_memchr(char **string_test,  char  *find_c, void *(*result_function)(const void *, int, size_t),
+						void *(*expected_function)(const void *, int, size_t))
+{
+	void	*result;
+	void	*expected;
+	int index;
+
+	index = 0;
+    char *start = find_c;
+	while (string_test[index])
+	{
+        find_c = start;
+		while(*find_c)
+		{
+            size_t random_int = generate_random_int(0, ft_strlen(string_test[index]), index);
+			result = result_function(string_test[index], *find_c, random_int);
+			expected = expected_function(string_test[index], *find_c, random_int);
+			cr_expect(result == expected,
+				"arg value: %s, should_find: %c , result:%d != expect:%d",
+				*string_test, *find_c, result, expected);
+			find_c++;
+		}
+		index++;
+	}
+	cr_expect(result == expected,
+			"arg value: %s, should_find: %c , result:%d != expect:%d",
+			string_test[index], '\0', result, expected);
+}
+
+Test(test_string, ft_memchr_teste)
+{
+	char **tests_values = random_string_generator(TEST_STRING_QTY);   
+	char *find_chars = create_ascii_arr();
+	run_test_string_memchr(tests_values, find_chars, &ft_memchr, &memchr);
+	free(find_chars);
+	free_string_generator(tests_values);
+}
+
+
+Test(test_string, ft_memcmp_test)
+{
+	char s[] = {-128, 0, 127, 0};
+	char sCpy[] = {-128, 0, 127, 0};
+	char s2[] = {0, 0, 127, 0};
+	char s3[] = {0, 0, 42, 0};
+	/* 1 */ cr_expect(ft_memcmp(s, sCpy, 4) == memcmp(s, sCpy, 4) ,"%d | %d", ft_memcmp(s, sCpy, 4),memcmp(s, sCpy, 4)); 
+	/* 2 */ cr_expect(ft_memcmp(s, s2, 0) == memcmp(s, s2, 0) ,"%d | %d", ft_memcmp(s, s2, 0),  memcmp(s, s2, 0)); 
+	/* 3 */ cr_expect(ft_memcmp(s, s2, 1)  == memcmp(s, s2, 1) ,"%d | %d", ft_memcmp(s, s2, 1) ,  memcmp(s, s2, 1)); 
+	/* 4 */ cr_expect(ft_memcmp(s2, s, 1)  == memcmp(s2, s, 1) ,"%d | %d", ft_memcmp(s2, s, 1) ,  memcmp(s2, s, 1));
+	/* 5 */ cr_expect(ft_memcmp(s2, s3, 4) > 0 && memcmp(s2, s3, 4) > 0 ,"%d | %d", ft_memcmp(s2, s3, 4)  , memcmp(s2, s3, 4));
+}
 
