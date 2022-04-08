@@ -5,7 +5,7 @@ int generate_random_int(int min, int max, int seed)
     int random_nbr;
 
     srandom(seed * random());
-    random_nbr = (min + (random() % (max - min + 1)));
+    random_nbr = rand() % (max + 1 - min) + min;
     return (random_nbr);
 }
 

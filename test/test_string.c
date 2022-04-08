@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 16:19:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/06 23:31:53 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/07 23:30:50 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ Test(test_string, ft_strlcpy_test)
 	int i = 0;
 	while (src[i])
 	{	
-		int random_int = generate_random_int(0,100,i);
+		int random_int = generate_random_int(1,100,i);
 		char dst[random_int];
 		char dst1[random_int];
 	
@@ -170,25 +170,170 @@ Test(test_string, ft_strlcpy_test)
 
 }
 
-// Test(test_string, ft_strlcat_test)
-// {
-// 	char **src = random_string_generator(5);
-// 	int random_int = generate_random_int(2500,2500,i);
-// 	char dst[random_int];
 
-// 	char dst1[random_int];
 
-// 	int i = 0;
-// 	while (src[i])
-// 	{	
-		
+Test(test_string, ft_strlcat_test)
+{
+	//char **src = random_string_generator(10);
 
-// 		cr_expect(ft_strlcat(dst,src[i],sizeof(dst)) == strlcat(dst1,src[i],sizeof(dst1)) && my_strcmp(dst1,dst) == 0,
-// 		"ft_cat=%d dst=%s| ori_cat = %d dst1=%s", (int)ft_strlcat(dst,src[i],sizeof(dst)), dst,(int)strlcat(dst1,src[i],sizeof(dst1)), dst1);
-// 		memset(dst1,0,random_int);
-// 		memset(dst,0,random_int);
-// 		i++;
-// 	}
-// 	free_string_generator(src);
+
+	// int i = 0;
+	// while (src[i])
+	// {	
+	// 	int random_int = generate_random_int(strlen(src[i]),strlen(src[i]) + 100,i);
+	// 	char dst[random_int];
+	// 	int int_other_random = generate_random_int(32,126,i);
+	// 	memset(dst, int_other_random,random_int / 2);
+ 	// 	char dst1[random_int];
+	// 	memset(dst1,int_other_random,random_int / 2);
+ 	// 	cr_expect(ft_strlcat(dst,src[i],sizeof(dst)) == strlcat(dst1,src[i],sizeof(dst1)) && my_strcmp(dst1,dst) == 0,
+	// 	"src=%s\ni=%d\nft_cat=%d dst=%s\nori_cat=%d dst1=%s", src[i],i,
+	// 	(int)ft_strlcat(dst,src[i],sizeof(dst)), 
+	// 	dst,
+	// 	(int)strlcat(dst1,src[i],sizeof(dst1)), dst1);
+	// 	i++;
+	// }
+	//free_string_generator(src);
+
+	char dest[30]; memset(dest, 0, 30);
+	char * src = (char *)"AAAAAAAAA";
+	dest[0] = 'B';
+	/* 1 */ cr_expect(ft_strlcat(dest, src, 0) == strlen(src) && !strcmp(dest, "B"));
+	dest[0] = 'B';
+	/* 2 */ cr_expect(ft_strlcat(dest, src, 1) == 10 && !strcmp(dest, "B"));
+	memset(dest, 'B', 4);
+	/* 3 */ cr_expect(ft_strlcat(dest, src, 3) == 3 + strlen(src) && !strcmp(dest, "BBBB"));
+	/* 4 */ cr_expect(ft_strlcat(dest, src, 6) == 13 && !strcmp(dest, "BBBBA"));
+	memset(dest, 'C', 5);
+	/* 5 */ cr_expect(ft_strlcat(dest, src, -1) == 14 && !strcmp(dest, "CCCCCAAAAAAAAA"));
+	memset(dest, 'C', 15);
+	/* 6 */ cr_expect(ft_strlcat(dest, src, 17) == 24 && !strcmp(dest, "CCCCCCCCCCCCCCCA"));
+	memset(dest, 0, 30);
+	/* 7 */ cr_expect(ft_strlcat(dest, src, 1) == strlen(src) && !strcmp(dest, ""));
+	memset(dest, 0, 30); memset(dest, '1', 10);
+	/* 8 */ cr_expect(ft_strlcat(dest, src, 5) == strlen(src) + 5 && !strcmp(dest, "1111111111"));
+	memset(dest, 0, 30); memset(dest, '1', 10);
+	/* 9 */ cr_expect(ft_strlcat(dest, src, 5) == strlen(src) + 5 && !strcmp(dest, "1111111111"));
+	memset(dest, 0, 30); memset(dest, '1', 10);
+	/* 10 */ cr_expect(ft_strlcat(dest, "", 15) == 10 && !strcmp(dest, "1111111111"));
+	memset(dest, 0, 30);
+	/* 11 */ cr_expect(ft_strlcat(dest, "", 42) == 0 && !strcmp(dest, ""));
+	memset(dest, 0, 30);
+	/* 12 */ cr_expect(ft_strlcat(dest, "", 0) == 0 && !strcmp(dest, ""));
+	memset(dest, 0, 30);
+	/* 13 */ cr_expect(ft_strlcat(dest, "123", 1) == 3 && !strcmp(dest, ""));
+	memset(dest, 0, 30);
+	/* 14 */ cr_expect(ft_strlcat(dest, "123", 2) == 3 && !strcmp(dest, "1"));
+	memset(dest, 0, 30);
+	/* 15 */ cr_expect(ft_strlcat(dest, "123", 3) == 3 && !strcmp(dest, "12"));
+	memset(dest, 0, 30);
+	/* 16 */ cr_expect(ft_strlcat(dest, "123", 4) == 3 && !strcmp(dest, "123"));
+	memset(dest, 0, 30);
+	size_t i = strlcat(dest, "123", 0);
+	//printf("%ld | %s", i, dest);
+	/* 17 */ cr_expect(i == 3 && !strcmp(dest, ""), "%d | %s", i, dest);
 	
-// }
+}
+
+Test(test_string, ft_strdup_test)
+{
+	char **src = random_string_generator(TEST_STRING_QTY);
+	int i = 0;
+	while (src[i])
+	{
+		char	*result = ft_strdup(src[i]);
+		char	*expected = strdup(src[i]);
+		cr_expect(my_strcmp(result,expected) == 0,"src=%s\nresult=%s\nexpected:%s", src[i], result, expected);
+		i++;
+		free(result);
+		free(expected);
+	}
+	free_string_generator(src);
+}
+
+int	compare_mem(void *s, void *d, int size)
+{
+	while (size && *(unsigned char*)s==*(unsigned char*)d)
+	{
+		//printf("%c | %c", *(unsigned char *)s, *(unsigned char *)d);
+		s++;
+		d++;
+		size--;
+	}
+	if (size <= 0)
+		return (1);
+	return (0);
+}
+
+Test(test_string, ft_memset)
+{
+	char **src = random_string_generator(TEST_STRING_QTY);
+	size_t i = 0;
+	while (src[i])
+	{
+		void *cp_src = strdup(src[i]);
+		size_t n = generate_random_int(1,strlen(src[i]),i);
+		int c = generate_random_int(32,126,i);
+ 		ft_memset(cp_src, c , n);
+		void *cp_src2 = strdup(src[i]);
+		memset(cp_src2, c, n);
+		cr_expect(compare_mem(cp_src,cp_src2, strlen(src[i])) == 0,"i=%d\nsrc=%.*s\nresult=%.*s\nexpected=%s\n",i, src[i], cp_src, cp_src2);
+		i++;
+		free(cp_src);
+		free(cp_src2);
+	}
+	free_string_generator(src);
+}
+
+Test(test_string, ft_bzero)
+{
+	char **src = random_string_generator(TEST_STRING_QTY);
+	size_t i = 0;
+	while (src[i])
+	{
+		void *cp_src = strdup(src[i]);
+		ft_bzero(cp_src, (size_t)generate_random_int(1,strlen(src[i]),i));
+		void *cp_src2 = strdup(src[i]);
+		bzero(cp_src2, (size_t)generate_random_int(1,strlen(src[i]),i));
+		cr_expect(compare_mem(cp_src,cp_src2, strlen(src[i])) == 0,"i=%d\nsrc=%.*s\nresult=%.*s\nexpected=%s\n",i, src[i], cp_src, cp_src2);
+		i++;
+		free(cp_src);
+		free(cp_src2);
+	}
+	free_string_generator(src);
+}
+
+Test(test_string, ft_memcpy)
+{
+	char dest[100];
+	memset(dest, 'A', 100);
+	ft_memcpy(dest, "coucou", 0);
+	/* 1 */ cr_expect(dest[0] == 'A');
+	char src[] = {0, 0};
+	ft_memcpy(dest, src, 2);
+	int i = 0;
+	for (; i < 100 && dest[i] == 0; ++i)
+		;
+	/* 2 */ cr_expect(i == 2 && dest[2] == 'A', "%d | %c", i  , dest[2] );
+}
+
+
+
+Test(test_string, ft_memmove)
+{
+
+	
+	char s[] = {65, 66, 67, 68, 69, 0, 45};
+	char s0[] = { 0,  0,  0,  0,  0,  0, 0};
+	char sCpy[] = {65, 66, 67, 68, 69, 0, 45};
+	char sResult[] = {67, 68, 67, 68, 69, 0, 45};
+	char sResult2[] = {67, 67, 68, 68, 69, 0, 45};
+
+	/* 1 */ cr_expect(ft_memmove(s0, s, 7) == s0 && !memcmp(s, s0, 7));  //Post 0
+	/* 2 */ cr_expect(ft_memmove(s, s + 2, 0) && !memcmp(s, sCpy, 7));  //0 move
+	/* 3 */ cr_expect(ft_memmove(s, s + 2, 2) == s && !memcmp(s, sResult, 7));  //forward
+	/* 4 */ cr_expect(ft_memmove(sResult + 1, sResult, 2) == sResult + 1 && !memcmp(sResult, sResult2, 7));  //reverse
+}
+
+
+
