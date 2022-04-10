@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 20:10:14 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/09 13:32:00 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/10 01:06:40 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/10 01:57:48 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	src_len;
-	size_t	qty_copied;
+	size_t	index;
+	size_t	s_len;
+	char	*strmapi;
 
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
-	qty_copied = 0;
-	while (src[qty_copied] && (qty_copied < size - 1))
+	if (!s || !f)
+		return (NULL);
+	s_len = ft_strlen(s);
+	strmapi = (char *)malloc(sizeof(char) * (s_len + 1));
+	if (!strmapi)
+		return (NULL);
+	index = 0;
+	while (s[index])
 	{
-		dst[qty_copied] = src[qty_copied];
-		qty_copied++;
+		strmapi[index] = f(index, s[index]);
+		index++;
 	}
-	dst[qty_copied] = '\0';
-	return (src_len);
+	strmapi[index] = 0;
+	return (strmapi);
 }

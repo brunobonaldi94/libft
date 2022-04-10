@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 20:10:14 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/09 13:32:00 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/09 13:28:59 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/09 23:12:26 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	src_len;
-	size_t	qty_copied;
+	char	*substring;
+	size_t	substring_len;
+	size_t	s_len;
 
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
-	qty_copied = 0;
-	while (src[qty_copied] && (qty_copied < size - 1))
-	{
-		dst[qty_copied] = src[qty_copied];
-		qty_copied++;
-	}
-	dst[qty_copied] = '\0';
-	return (src_len);
+	s_len = ft_strlen(s);
+	if (start >= s_len)
+		return (NULL);
+	if (len > s_len - start)
+		len = s_len - start;
+	substring_len = len + 1;
+	substring = (char *)malloc(sizeof(char) * substring_len);
+	if (!substring)
+		return (NULL);
+	ft_strlcpy(substring, &s[start], substring_len);
+	return (substring);
 }

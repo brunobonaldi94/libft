@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 20:10:14 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/09 13:32:00 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/10 01:29:15 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/10 01:55:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+void	ft_putchar_fd(char c, int fd)
 {
-	size_t	src_len;
-	size_t	qty_copied;
-
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
-	qty_copied = 0;
-	while (src[qty_copied] && (qty_copied < size - 1))
-	{
-		dst[qty_copied] = src[qty_copied];
-		qty_copied++;
-	}
-	dst[qty_copied] = '\0';
-	return (src_len);
+	write(fd, &c, 1);
 }

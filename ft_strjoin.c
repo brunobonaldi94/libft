@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 20:10:14 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/09 13:32:00 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/09 13:32:36 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/09 13:33:20 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	src_len;
-	size_t	qty_copied;
+	char	*join_string;
+	size_t	join_total_len;
+	size_t	s1_len;
+	size_t	s2_len;
 
-	src_len = ft_strlen(src);
-	if (size == 0)
-		return (src_len);
-	qty_copied = 0;
-	while (src[qty_copied] && (qty_copied < size - 1))
-	{
-		dst[qty_copied] = src[qty_copied];
-		qty_copied++;
-	}
-	dst[qty_copied] = '\0';
-	return (src_len);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	join_total_len = s1_len + s2_len + 1;
+	join_string = (char *)malloc(sizeof(char) * join_total_len);
+	if (!join_string)
+		return (NULL);
+	ft_strlcpy(join_string, s1, join_total_len);
+	ft_strlcat(join_string, s2, join_total_len);
+	return (join_string);
 }
