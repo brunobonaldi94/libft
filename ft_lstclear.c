@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:43:41 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/11 20:34:41 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/12 00:05:56 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
 	t_list	*tmp;
 
-	if (lst)
+	if (!lst)
 		return ;
 	while ((*lst))
 	{	
