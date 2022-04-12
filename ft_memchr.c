@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 16:46:35 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/08 19:31:00 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:30:38 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	index = 0;
 	while (index < n)
 	{
-		if (*s_uc == c)
+		if (*s_uc == (unsigned char)c)
 			return (s_uc);
 		index++;
 		s_uc++;

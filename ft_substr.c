@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 13:28:59 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/09 23:12:26 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/11 23:29:58 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	s_len = ft_strlen(s);
 	if (start >= s_len)
-		return (NULL);
+	{
+		substring = (char *)ft_calloc(1, sizeof(char));
+		return (substring);
+	}
 	if (len > s_len - start)
 		len = s_len - start;
 	substring_len = len + 1;

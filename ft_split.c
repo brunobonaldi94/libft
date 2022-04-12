@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:11:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/09 23:59:40 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/11 23:31:27 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static size_t	get_total_words(char const *s, char sep)
 	size_t	words_count;
 
 	words_count = 0;
+	if (!*s)
+		return (words_count);
 	if (!ft_strchr(s, sep))
 		return (1);
 	while (*s)

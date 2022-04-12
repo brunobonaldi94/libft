@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 23:47:10 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/06 21:56:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/11 21:37:23 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s != c)
+	while (*s != (char)c)
 	{
 		if (!*s)
 			return (NULL);
