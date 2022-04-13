@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:55:11 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/11 20:35:25 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:04:17 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*temp;
 	void	*content;
 
-	lstmap = (t_list *)malloc(sizeof(t_list));
-	if (!lstmap)
+	if (!lst)
 		return (NULL);
+	lstmap = NULL;
 	while (lst)
 	{
 		content = f(lst->content);
