@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 19:24:47 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/12 00:20:15 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/12 21:52:05 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list *tail;
+	t_list	*tail;
+
 	if (!lst || !new)
 		return ;
 	if (!(*lst))
