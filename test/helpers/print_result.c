@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_ascii_arr.c                                 :+:      :+:    :+:   */
+/*   print_result.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/05 21:30:35 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/14 17:52:45 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/14 19:43:26 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/15 12:49:50 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
 
-char	*create_ascii_arr(char *tests_values)
+void	print_result(int result)
 {
-	char c;
-	int	i;
-	int	ascii_count = 127; 
-	
-
-	c = 1;
-	i = 0;
-	while (i < ascii_count)
-	{
-		tests_values[i] = c;
-		i++;
-		c++;
-	}
-	tests_values[i] = '\0';
-	return (tests_values);
+	char *res= result ? OK : KO;
+	char *color = result ? GREEN : RED;
+	(void)result;
+	printf("\n%s%s\n"RESET,color,res);
 }
