@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/15 22:50:47 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/16 16:58:09 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,17 @@ char	**random_string_generator(int qty);
 int		generate_random_int(int min, int max, int seed);
 void	free_string_generator(char **test_values);
 void	transform_to_one(int *value);
-void   	print_result(int result);
+void	print_result(int result);
 void	remove_file(char *file_name);
 void	create_results(char *file_name,int index_test, int c, int exp, int res);
+void	create_results_strlen(char *file_name,int index_test, char *c, int exp, int res);
+void	create_results_memset(char *file_name,int index_test, char c, void *exp, void *res, size_t n);
+void	create_results_memcpy(char *file_name,int index_test, char *c, void *exp, void *res, size_t n);
 void	loop_through_tests_isxxx(char *tests_values, char *function_name, int (*result)(int), int (*expected)(int));
-void    print_result_with_test(size_t total, size_t success_results);
+void	loop_through_tests_strlen(char **tests_values, char *function_name, size_t (*result)(const char *), size_t (*expected)(const char *));
+void	loop_through_tests_memset(char *tests_values, char *function_name, void *(*result)(void *, int, size_t),  void *(*expected)(void *, int, size_t));
+void 	loop_through_tests_bzero(char *tests_values, char *function_name, void (*result)(void *,  size_t),  void (*expected)(void *, size_t));
+void	loop_through_tests_memcpy(char **tests_values, char *function_name, void *(*result)(void *, const void *,  size_t), void *(*expected)(void *, const void *,  size_t));
+void	loop_through_tests_memmove(char **tests_values, char *function_name, void *(*result)(void *, const void *,  size_t), void *(*expected)(void *, const void *,  size_t));
+void	print_result_with_test(size_t total, size_t success_results);
 #endif
