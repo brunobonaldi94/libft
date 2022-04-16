@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/15 14:00:36 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/15 22:50:47 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,5 @@ void   	print_result(int result);
 void	remove_file(char *file_name);
 void	create_results(char *file_name,int index_test, int c, int exp, int res);
 void	loop_through_tests_isxxx(char *tests_values, char *function_name, int (*result)(int), int (*expected)(int));
-
+void    print_result_with_test(size_t total, size_t success_results);
 #endif

@@ -66,7 +66,7 @@ $(NAME):	$(OBJS)
 	$(RANLIB) $(NAME)
 
 bonus: $(NAME) $(OBJS_BONUS)
-	$(AR) $(NAME) $(OBJS_BONUS)
+	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS) 
 	$(RANLIB) $(NAME)
 
 clean:

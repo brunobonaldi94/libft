@@ -1,8 +1,9 @@
 SRCS_PATH = srcs_tests/
-MANDATORY = isalpha isascii
+MANDATORY = isalpha isascii isdigit
 OBJS = $(SRCS:%.c=%.o)
 
-PARENT_DIR		= $(shell dirname $(shell pwd))
+#PARENT_DIR		= $(shell dirname $(shell pwd))
+PARENT_DIR = /media/brunobonaldi/Seagate Expansion Drive/Programming-Study/42 Sao Paulo/42projects/00-libft/libft
 LIBFT_PATH		= $(PARENT_DIR)
 
 HELPERS_PATH = helpers/
@@ -16,7 +17,7 @@ NAME = main
 INCLUDES = ./
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -I$(INCLUDES)
 RM = rm -rf
 
 LIB = ../libft.a
@@ -26,9 +27,13 @@ LIB = ../libft.a
 
 all:	$(MANDATORY) 
 
-$(MANDATORY): %:
-	$(CC) $(CFLAGS) $(SRCS_HELPERS) $(SRCS_PATH)ft_$*_test.c -L$(LIBFT_PATH) -lft && $(VALGRIND) ./a.out && rm -f a.out
+$(MANDATORY): %: mandatory_start
+	@$(CC) $(CFLAGS) $(SRCS_HELPERS) $(SRCS_PATH)ft_$*_test.c -L'$(LIBFT_PATH)' -lft && $(VALGRIND) ./a.out && rm -f a.out
 
+mandatory_start:
+	@tput setaf 6
+	make -C '$(LIBFT_PATH)'
+	@tput setaf 4 && echo [Mandatory]
 
 clean:
 	$(RM) $(OBJS) $(OBJS_HELPERS)

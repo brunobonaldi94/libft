@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:30:40 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/15 13:32:01 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/15 22:52:24 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void loop_through_tests_isxxx(char *tests_values, char *function_name, int (*res
 	size_t i = 0;
 	size_t final_result;
 	final_result = 0;
-	printf(BLUE"TEST NAME:"PURPLE" %s\n"RESET, function_name);
+	printf(BLUE"TEST NAME:"PURPLE" %s\n\n"RESET, function_name);
 	char test_file_name[100] = "srcs_tests/";
 	ft_strlcat(test_file_name, function_name, sizeof(test_file_name));
 	ft_strlcat(test_file_name, "_test_results", sizeof(test_file_name));
@@ -46,8 +46,5 @@ void loop_through_tests_isxxx(char *tests_values, char *function_name, int (*res
 		final_result += compare_results(test_file_name,tests_values[i], i, result,expected);
 		i++;
 	}
-	if (final_result == i)
-		print_result(SUCCESS);
-	else
-		print_result(FAILURE);
+    print_result_with_test(i, final_result);
 }

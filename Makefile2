@@ -85,7 +85,7 @@ $(HELPERS_PATH)%.o:	$(HELPERS_PATH)%.c
 	$(CC) $(CFLAGS) -c -I./$(TEST_PATH) $< -o $(<:%.c=%.o)
 
 $(TEST):	$(TEST_OBJS) $(HELPERS_OBJS)
-	$(CC) $(CFLAGS) $(TEST_OBJS) $(HELPERS_OBJS) $(NAME) -o $(basename $(TEST)) -lcriterion -lbsd
+	echo $(CC) $(CFLAGS) $(TEST_OBJS) $(HELPERS_OBJS) $(NAME) -o $(basename $(TEST)) -lcriterion -lbsd
 
 
 clean_test:
