@@ -1,5 +1,5 @@
 SRCS_PATH = srcs_tests/
-MANDATORY = isalpha isascii isdigit isalnum isprint strlen memset bzero memcpy memmove
+MANDATORY = isalpha isascii isdigit isalnum isprint tolower toupper strlen memset bzero memcpy memmove strlcpy strlcat
 OBJS = $(SRCS:%.c=%.o)
 
 #PARENT_DIR		= $(shell dirname $(shell pwd))
@@ -28,7 +28,7 @@ LIB = ../libft.a
 all:	$(MANDATORY) 
 
 $(MANDATORY): %: mandatory_start
-	@$(CC) $(CFLAGS) $(SRCS_HELPERS) $(SRCS_PATH)ft_$*_test.c -L'$(LIBFT_PATH)' -lft && $(VALGRIND) ./a.out && rm -f a.out
+	@$(CC) $(CFLAGS) $(SRCS_HELPERS) $(SRCS_PATH)ft_$*_test.c -L'$(LIBFT_PATH)' -lft -lbsd && $(VALGRIND) ./a.out && rm -f a.out
 
 mandatory_start:
 	@tput setaf 6

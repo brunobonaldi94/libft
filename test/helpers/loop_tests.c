@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:30:40 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/16 16:59:11 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/17 21:33:58 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,39 @@ void loop_through_tests_isxxx(char *tests_values, char *function_name, int (*res
 	}
 	print_result_with_test(i, final_result);
 }
+
+int    compare_results_toupperlower(char *file_name, int c, int index_test,int (*result)(int), int (*expected)(int))
+{
+	int final_result = 1;
+	int res = result(c);
+	int exp = expected(c);
+	if (res != exp)
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	
+	create_results_toupperlower(file_name, index_test, c, exp, res);
+	return (final_result);
+}
+
+void loop_through_tests_toupperlower(char *tests_values, char *function_name, int (*result)(int), int	(*expected)(int))
+{
+	size_t i = 0;
+	size_t final_result;
+	final_result = 0;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_toupperlower(test_file_name,tests_values[i], i, result,expected);
+		i++;
+	}
+	print_result_with_test(i, final_result);
+}
+
 
 int    compare_results_strlen(char *file_name, char *c, int index_test, size_t (*result)(const char *), size_t (*expected)(const char *))
 {
@@ -121,7 +154,7 @@ void loop_through_tests_memset(char *tests_values, char *function_name, void *(*
 		final_result += compare_results_memset(test_file_name,tests_values[i], i, result,expected);
 		i++;
 	}
-    i++;
+	i++;
 	final_result += compare_results_memset(test_file_name,tests_values[i], i, result,expected);
 	print_result_with_test(i, final_result);
 }
@@ -158,7 +191,7 @@ void loop_through_tests_bzero(char *tests_values, char *function_name, void (*re
 		final_result += compare_results_bzero(test_file_name,tests_values[i], i, result,expected);
 		i++;
 	}
-    i++;
+	i++;
 	final_result += compare_results_bzero(test_file_name,tests_values[i], i, result,expected);
 	print_result_with_test(i, final_result);
 }
@@ -169,8 +202,8 @@ int    compare_results_memcpy(char *file_name, char *c,int index_test, void *(*r
 	char res[50] = "saf";
 	char exp[50] = "saf";
 	size_t n_bytes = generate_random_int(0, 50,index_test);
-	result(res, c,n_bytes);
-	expected(exp, c,n_bytes);
+	result(res, c, n_bytes);
+	expected(exp, c, n_bytes);
 	if (memcmp(res, exp, 50) != 0)
 	{
 		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
@@ -179,7 +212,7 @@ int    compare_results_memcpy(char *file_name, char *c,int index_test, void *(*r
 	else
 		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
 	
-	create_results_memcpy(file_name, index_test, c, exp, res, n_bytes);
+	create_results_cpy(file_name, index_test, c, exp, res, n_bytes);
 	return (final_result);
 }
 
@@ -210,12 +243,12 @@ void loop_through_tests_memmove(char **tests_values, char *function_name, void *
 		final_result += compare_results_memcpy(test_file_name,tests_values[i], i, result,expected);
 		i++;
 	}
-    i++;
+	i++;
 
 	char res[50] = "testing_overlap";
 	char exp[50] = "testing_overlap";
 	size_t n_bytes = generate_random_int(0, 50,i);
-	result(&res[2], &res[0],n_bytes);
+	expected(&res[2], &res[0],n_bytes);
 	result(&exp[2], &exp[0],n_bytes);
 	if (memcmp(res, exp, 50) != 0)
 	{
@@ -224,10 +257,65 @@ void loop_through_tests_memmove(char **tests_values, char *function_name, void *
 	}
 	else
 	{
-        printf(WHITE" #"BLUE"%ld-"GREEN"%s"RESET, i,OK);
-        final_result++;
-    }
+		printf(WHITE" #"BLUE"%ld-"GREEN"%s"RESET, i,OK);
+		final_result++;
+	}
 	
-	create_results_memcpy(test_file_name, i,"testing_overlap", exp, res, n_bytes);
+	create_results_cpy(test_file_name, i,"testing_overlap", exp, res, n_bytes);
+	print_result_with_test(i, final_result);
+}
+
+
+int    compare_results_strl(char *file_name, char *c,int index_test, size_t(*result)(char *, const char *,  size_t), size_t(*expected)(char *, const char *,  size_t))
+{
+	int final_result = 1;
+	char res[50] = "saf";
+	char exp[50] = "saf";
+	size_t n_bytes = generate_random_int(0, 50,index_test);
+	result(res, c, n_bytes);
+	expected(exp, c, n_bytes);
+	if (strcmp(res, exp) != 0)
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	
+	create_results_cpy(file_name, index_test, c, exp, res, n_bytes);
+	return (final_result);
+}
+
+void loop_through_tests_strl(char **tests_values, char *function_name, size_t(*result)(char *, const char *,  size_t), size_t(*expected)(char *, const char *,  size_t))
+{
+	size_t i = 0;
+	size_t final_result;
+	final_result = 0;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_strl(test_file_name,tests_values[i], i, result,expected);
+		i++;
+	}
+	i++;
+
+	char res[50] = "ac";
+	char exp[50] = "ac";
+	char src[6] = "abcas";
+	result(res, src,sizeof(res));
+	result(exp, src,sizeof(exp));
+	if (strcmp(res, exp) != 0)
+	{
+		printf(WHITE" #"BLUE"%ld-"RED"%s"RESET, i,KO);
+		final_result = 0;
+	}
+	else
+	{
+		printf(WHITE" #"BLUE"%ld-"GREEN"%s"RESET, i,OK);
+		final_result++;
+	}
+	
+	create_results_cpy(test_file_name, i,res, exp, res, sizeof(res));
 	print_result_with_test(i, final_result);
 }
