@@ -31,7 +31,7 @@ SRCS =	ft_isalpha.c \
 		ft_putchar_fd.c \
 		ft_putstr_fd.c \
 		ft_putendl_fd.c \
-		ft_putnbr_fd.c \
+		ft_putnbr_fd.c 
 
 SRCS_BONUS = 	ft_lstnew.c \
 				ft_lstadd_front.c \
@@ -49,7 +49,7 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 NAME = libft.a
 INCLUDES = ./
 
-CC = cc
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
 RANLIB = ranlib
@@ -65,7 +65,7 @@ $(NAME):	$(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	$(RANLIB) $(NAME)
 
-bonus: $(NAME) $(OBJS_BONUS)
+bonus:	$(OBJS) $(OBJS_BONUS)
 	$(AR) $(NAME) $(OBJS) $(OBJS_BONUS) 
 	$(RANLIB) $(NAME)
 
