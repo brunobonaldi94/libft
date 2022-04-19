@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 00:00:28 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/10 01:08:35 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/18 21:06:10 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ char	*ft_itoa(int n)
 	itoa_elements = get_nbr_elements(n);
 	n_copy = change_sign(n, &sign);
 	itoa = (char *)malloc(sizeof(char) * (sign + itoa_elements + 1));
-	itoa[sign + itoa_elements] = '\0';
 	if (!itoa)
 		return (NULL);
+	itoa[sign + itoa_elements] = '\0';
 	if (sign == 1)
 			itoa[0] = '-';
 	while (itoa_elements)

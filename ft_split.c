@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 21:11:34 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/11 23:31:27 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/18 21:04:42 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 	size_t	split_index;
 
+	if (!s)
+		return (NULL);
 	split = (char **)malloc(sizeof(char *) * (get_total_words(s, c) + 1));
 	if (!split)
 		return (NULL);
