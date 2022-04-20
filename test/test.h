@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/18 23:45:48 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/19 23:48:29 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void create_results_memset(char *file_name, int index_test, char c, void *exp, v
 void create_results_cpy(char *file_name, int index_test, char *c, void *exp, void *res, size_t n);
 void create_results_strchr(char *file_name, int index_test, char c, char *exp, char *res);
 void create_results_strncmp(char *file_name, int index_test, char *c, char *c1, int exp, int res, size_t n);
+void	create_results_memchr(char *file_name,int index_test, char c, void *exp, void *res, size_t i);
 void loop_through_tests_isxxx(char *tests_values, char *function_name, int (*result)(int), int (*expected)(int));
 void loop_through_tests_toupperlower(char *tests_values, char *function_name, int (*result)(int), int (*expected)(int));
 void loop_through_tests_strlen(char **tests_values, char *function_name, size_t (*result)(const char *), size_t (*expected)(const char *));
@@ -64,6 +65,7 @@ void loop_through_tests_memcpy(char **tests_values, char *function_name, void *(
 void loop_through_tests_memmove(char **tests_values, char *function_name, void *(*result)(void *, const void *, size_t), void *(*expected)(void *, const void *, size_t));
 void loop_through_tests_strncmp(char **tests_values, char *function_name, int (*result)(const char *, const char *, size_t n), int (*expected)(const char *, const char *, size_t n));
 void loop_through_tests_memcmp(char **tests_values, char *function_name, int (*result)(const void *, const void *, size_t n), int (*expected)(const void *, const void *, size_t n));
+void loop_through_tests_memchr(char *tests_values, char *function_name, void *(*result)(const void *, int c, size_t), void *(*expected)(const void *, int c,size_t));
 void loop_through_tests_strl(char **tests_values, char *function_name, size_t (*result)(char *, const char *, size_t), size_t (*expected)(char *, const char *, size_t));
 void print_result_with_test(size_t total, size_t success_results);
 #endif

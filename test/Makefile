@@ -1,5 +1,5 @@
 SRCS_PATH = srcs_tests/
-MANDATORY = isalpha isascii isdigit isalnum isprint tolower toupper strlen memset bzero memcpy memmove strlcpy strlcat strchr strrchr strncmp memcmp
+MANDATORY = isalpha isascii isdigit isalnum isprint tolower toupper strlen memset bzero memcpy memmove strlcpy strlcat strchr strrchr strncmp memcmp memchr
 OBJS = $(SRCS:%.c=%.o)
 
 #PARENT_DIR		= $(shell dirname $(shell pwd))

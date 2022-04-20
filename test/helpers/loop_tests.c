@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:30:40 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/18 23:47:03 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/19 23:49:22 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -469,5 +469,44 @@ void loop_through_tests_memcmp(char **tests_values, char *function_name, int (*r
 	char test_file_name[100] = {0};
 	print_function_name(test_file_name, function_name, 100);
 	compare_results_memcmp(test_file_name,tests_values, &i,&final_result, result,expected);
+	print_result_with_test(i, final_result);
+}
+
+
+int    compare_results_memchr(char *file_name, char c,int index_test, void *(*result)(const void *, int c, size_t), void *(*expected)(const void *, int c, size_t))
+{
+	int final_result = 1;
+	char *res = "<Q7e1l$cVn;wB*;m&4H]0tjqM5s!Dz)YhUvOI7hs<$ju*56@6s^L?3C{sox4KBj9*[ONtt}U{]";
+    size_t i = generate_random_int(0, strlen(res),index_test);
+	char *exp_ = expected(res, c, i);
+	char *res_ = result(res, c, i);
+	if (my_strcmp(res_, exp_) != 0)
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	if (res_ == NULL)
+		res_ = "NULL";
+	if (exp_ == NULL)
+		exp_ = "NULL";
+	create_results_memchr(file_name, index_test, c, res_, exp_, i);
+
+	return (final_result);
+}
+
+void loop_through_tests_memchr(char *tests_values, char *function_name, void *(*result)(const void *, int c, size_t), void *(*expected)(const void *, int c,size_t))
+{
+	size_t i = 0;
+	size_t final_result;
+	final_result = 0;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_memchr(test_file_name,tests_values[i], i, result,expected);
+		i++;
+	}
 	print_result_with_test(i, final_result);
 }
