@@ -1,7 +1,7 @@
 .vscode
 *.o
 *.a
-/test/test_result
+/test/test_results
 *.txt
 /test_main
 /libftTester
