@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/20 23:29:26 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/21 11:46:07 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,7 @@ void loop_through_tests_calloc(size_t tests_values[], char *function_name, void 
 void loop_through_tests_strdup(char **tests_values, char *function_name, char *(*result)(const char *), char * (*expected)(const char *));
 void loop_through_tests_substr(char *function_name, char *(*result)(const char *, unsigned int, size_t));
 void print_result_with_test(size_t total, size_t success_results);
+void	check(int test, size_t *index, size_t *final_result);
+char	*print_function_name(char *test_file_name, char *function_name, size_t n);
+int	my_strcmp(char *s1, char *s2);
 #endif
