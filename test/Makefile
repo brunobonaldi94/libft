@@ -1,7 +1,8 @@
 SRCS_PATH = srcs_tests/
-MANDATORY = isalpha isascii isdigit isalnum isprint tolower toupper strlen memset bzero memcpy memmove strlcpy strlcat strchr strrchr strncmp memcmp memchr
+MANDATORY = isalpha isascii isdigit isalnum isprint tolower toupper strlen memset bzero memcpy \
+			memmove strlcpy strlcat strchr strrchr strncmp memcmp memchr strnstr atoi calloc strdup substr 
 OBJS = $(SRCS:%.c=%.o)
-
+BONUS = lstnew
 #PARENT_DIR		= $(shell dirname $(shell pwd))
 PARENT_DIR = /media/brunobonaldi/Seagate Expansion Drive/Programming-Study/42 Sao Paulo/42projects/00-libft/libft
 LIBFT_PATH		= $(PARENT_DIR)
@@ -25,15 +26,24 @@ LIB = ../libft.a
 %.o:	%.c
 	$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $(<:%.c=%.o)
 
-all:	$(MANDATORY) 
+all:	$(MANDATORY) $(BONUS)
 
 $(MANDATORY): %: mandatory_start
+	@$(CC) $(CFLAGS) $(SRCS_HELPERS) $(SRCS_PATH)ft_$*_test.c -L'$(LIBFT_PATH)' -lft -lbsd && $(VALGRIND) ./a.out && rm -f a.out
+
+$(BONUS): %: bonus_start
+	cd ../ && make bonus && cd test
 	@$(CC) $(CFLAGS) $(SRCS_HELPERS) $(SRCS_PATH)ft_$*_test.c -L'$(LIBFT_PATH)' -lft -lbsd && $(VALGRIND) ./a.out && rm -f a.out
 
 mandatory_start:
 	@tput setaf 6
 	make -C '$(LIBFT_PATH)'
 	@tput setaf 4 && echo [Mandatory]
+
+bonus_start:
+	@tput setaf 6
+	make -C '$(LIBFT_PATH)'
+	@tput setaf 4 && echo [Bonus]
 
 clean:
 	$(RM) $(OBJS) $(OBJS_HELPERS)

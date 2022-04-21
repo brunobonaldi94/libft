@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:30:40 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/19 23:49:22 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/20 23:39:17 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,7 +477,7 @@ int    compare_results_memchr(char *file_name, char c,int index_test, void *(*re
 {
 	int final_result = 1;
 	char *res = "<Q7e1l$cVn;wB*;m&4H]0tjqM5s!Dz)YhUvOI7hs<$ju*56@6s^L?3C{sox4KBj9*[ONtt}U{]";
-    size_t i = generate_random_int(0, strlen(res),index_test);
+	size_t i = generate_random_int(0, strlen(res),index_test);
 	char *exp_ = expected(res, c, i);
 	char *res_ = result(res, c, i);
 	if (my_strcmp(res_, exp_) != 0)
@@ -508,5 +508,223 @@ void loop_through_tests_memchr(char *tests_values, char *function_name, void *(*
 		final_result += compare_results_memchr(test_file_name,tests_values[i], i, result,expected);
 		i++;
 	}
+	print_result_with_test(i, final_result);
+}
+
+int    compare_results_strnstr(char *file_name, char *c,int index_test, char *(*result)(const char *, const char *, size_t), char *(*expected)(const char *, const char *, size_t))
+{
+	int final_result = 1;
+	char *res = "<Q7e1l$cVn;wB*;m&4H]0tjqM5s!Dz)YhUvOI7hs<$ju*56@6s^L?3C{sox4KBj9*[ONtt}U{]e1l$cVn;wB*;m&4H]0tjqM5s!Dz)YhUvOI7hs<$";
+	size_t i = generate_random_int(0, strlen(res),index_test);
+	char *exp_ = expected(res, c, i);
+	char *res_ = result(res, c, i);
+	if (my_strcmp(res_, exp_) != 0)
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	if (res_ == NULL)
+		res_ = "NULL";
+	if (exp_ == NULL)
+		exp_ = "NULL";
+	create_results_strnstr(file_name, index_test, c, res_, exp_, i);
+
+	return (final_result);
+}
+
+void loop_through_tests_strnstr(char **tests_values, char *function_name, char *(*result)(const char *, const char *, size_t), char *(*expected)(const char *, const char *, size_t))
+{
+	size_t i = 0;
+	size_t final_result;
+	final_result = 0;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_strnstr(test_file_name,tests_values[i], i, result,expected);
+		i++;
+	}
+	print_result_with_test(i, final_result);
+}
+
+
+int    compare_results_atoi(char *file_name, const char *c,int index_test, int (*result)(const char *), int (*expected)(const char *))
+{
+	int final_result = 1;
+ 	int exp_ = expected(c);
+	int res_ = result(c);
+	if (res_ != exp_)
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	create_results_atoi(file_name, index_test, c, res_, exp_);
+
+	return (final_result);
+}
+
+void loop_through_tests_atoi(char **tests_values, char *function_name, int (*result)(const char *), int (*expected)(const char *))
+{
+	size_t i = 0;
+	size_t final_result;
+	final_result = 0;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_atoi(test_file_name,tests_values[i], i, result,expected);
+		i++;
+	}
+	print_result_with_test(i, final_result);
+}
+
+int    compare_results_calloc(char *file_name, size_t c, size_t c1,int index_test, void *(*result)(size_t, size_t), void * (*expected)(size_t, size_t))
+{
+	int final_result = 1;
+ 	void *exp_ = expected(c, c1);
+	void *res_ = result(c,c1);
+	size_t result_times = c * c1;
+	if (c1 != 0 && result_times / c1 != c)
+	{
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+		create_results_calloc(file_name, index_test, c, c1, malloc_usable_size(res_), malloc_usable_size(exp_));
+		free(res_);
+		free(exp_);
+		return (1);
+	}
+	if (malloc_usable_size(res_) != malloc_usable_size(exp_))
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	create_results_calloc(file_name, index_test, c, c1, malloc_usable_size(res_), malloc_usable_size(exp_));
+	free(res_);
+	free(exp_);
+	return (final_result);
+}
+
+void loop_through_tests_calloc(size_t tests_values[], char *function_name, void *(*result)(size_t, size_t), void * (*expected)(size_t, size_t))
+{
+	size_t i = 1;
+	size_t final_result;
+	final_result = 1;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_calloc(test_file_name,tests_values[i - 1],tests_values[i], i, result,expected);
+		i++;
+	}
+	print_result_with_test(i, final_result);
+}
+
+int    compare_results_strdup(char *file_name, const char *c,int index_test, char *(*result)(const char *), char * (*expected)(const char *))
+{
+	int final_result = 1;
+ 	char *exp_ = expected(c);
+	char *res_ = result(c);
+	if (my_strcmp(res_,exp_) != 0)
+	{
+		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+		final_result = 0;
+	}
+	else
+		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+	create_results_strdup(file_name, index_test, c, res_, exp_);
+	free(res_);
+	free(exp_);
+	return (final_result);
+}
+
+void loop_through_tests_strdup(char **tests_values, char *function_name, char *(*result)(const char *), char * (*expected)(const char *))
+{
+	size_t i = 1;
+	size_t final_result;
+	final_result = 1;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+	while (tests_values[i])
+	{
+		final_result += compare_results_strdup(test_file_name,tests_values[i], i, result,expected);
+		i++;
+	}
+	print_result_with_test(i, final_result);
+}
+
+// int    compare_results_substr(char *file_name, const char *c,int index_test, char *(*result)(const char *, size_t, size_t))
+// {
+// 	int final_result = 1;
+// 	char *res_ = result(c);
+// 	if (my_strcmp(res_,exp_) != 0)
+// 	{
+// 		printf(WHITE" #"BLUE"%d-"RED"%s"RESET, index_test,KO);
+// 		final_result = 0;
+// 	}
+// 	else
+// 		printf(WHITE" #"BLUE"%d-"GREEN"%s"RESET, index_test,OK);
+// 	create_results_strdup(file_name, index_test, c, res_);
+// 	free(res_);
+// 	free(exp_);
+// 	return (final_result);
+// }
+
+void	check(int test, size_t *index, size_t *final_result)
+{
+	if (test == 0)
+		printf(WHITE" #"BLUE"%ld-"RED"%s"RESET, *index,KO);
+	else
+	{
+		*final_result += 1;
+		printf(WHITE" #"BLUE"%ld-"GREEN"%s"RESET, *index,OK);
+	}
+	*index += 1;
+}
+
+void loop_through_tests_substr(char *function_name, char *(*result)(const char *, unsigned int, size_t))
+{
+	size_t i = 0;
+	size_t final_result = 0;
+	char test_file_name[100] = {0};
+	print_function_name(test_file_name, function_name, 100);
+
+	char * s = result("tripouille", 0, 42000);
+	check(strcmp(s, "tripouille") == 0, &i, &final_result);
+	
+	s = result("tripouille", 1, 1);
+ 	check(strcmp(s, "r") == 0, &i, &final_result);
+	free(s);
+
+	s = result("tripouille", 100, 1);
+	check(strcmp(s, "") == 0, &i, &final_result);
+	free(s);
+	
+	char * str = strdup("1");
+	s = result(str, 42, 42000000);
+	check(strcmp(s, "") == 0, &i, &final_result);
+	free(s);
+	
+	str = strdup("0123456789");
+	s = result(str, 9, 10);
+	check(strcmp(s, "9") == 0, &i, &final_result);
+	free(str);
+    free(s);
+	
+	s = result("42", 0, 0);
+	check(strcmp(s, "") == 0, &i, &final_result);
+	free(s);
+	
+	s = result("BONJOUR LES HARICOTS !", 8, 14);
+	check(strcmp(s, "LES HARICOTS !") == 0, &i, &final_result);
+	free(s);
+	
+	s = result("test", 1, 2);
+	check(strcmp(s, "es") == 0, &i, &final_result);
+	free(s);
 	print_result_with_test(i, final_result);
 }

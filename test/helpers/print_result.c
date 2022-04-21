@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 19:43:26 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/16 11:55:34 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/20 22:16:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void    print_result_with_test(size_t total, size_t success_results)
 	if (success_results == total)
 		print_result(SUCCESS);
 	else
-		print_result(FAILURE);
+        print_result(FAILURE);
 }
