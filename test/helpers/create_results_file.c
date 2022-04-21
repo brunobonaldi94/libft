@@ -6,17 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:03:46 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/20 22:54:21 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:53:37 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-void    remove_file(char *file_name)
-{
-    remove(file_name);
-
-}
 
 void	write_logs(char *file_name, char *message)
 {

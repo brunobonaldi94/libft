@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   function_name.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 19:24:47 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/21 18:06:41 by bbonaldi         ###   ########.fr       */
+/*   Created: 2022/04/21 16:49:52 by bbonaldi          #+#    #+#             */
+/*   Updated: 2022/04/21 18:53:13 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "test.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+char	*print_function_name(char *test_file_name, char *function_name, size_t n)
 {
-	t_list	*tail;
-
-	if (!lst || !new)
-		return ;
-	if (!(*lst))
-	{
-		*lst = new;
-		return ;
-	}
-	tail = ft_lstlast(*lst);
-	tail->next = new;
+	printf(BLUE"TEST NAME:"PURPLE" %s\n\n"RESET, function_name);
+	strlcpy(test_file_name,"test_results/",n);
+	strlcat(test_file_name, function_name, n);
+	strlcat(test_file_name, "_test_results", n);
+	remove_file(test_file_name);
+	return (test_file_name);
 }

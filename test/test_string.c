@@ -6,26 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/03 16:19:52 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/08 19:24:01 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:14:10 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-
-int	my_strcmp(char *s1, char *s2)
-{
-	if (s1 == NULL && s2 == NULL)
-		return (0);
-	if ((s1 == NULL && s2 != NULL) || (s2 == NULL && s1 != NULL))
-		return (-1);
-	while (*s1 && *s2 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (unsigned char)*s1 - (unsigned char)*s2;
-}
 
 void	run_test_string_string(char **string_test, size_t (*result_function)(const char *),
 						size_t (*expected_function)(const char *))

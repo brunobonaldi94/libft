@@ -6,21 +6,11 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:30:40 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/21 10:48:02 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/21 18:51:19 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-char	*print_function_name(char *test_file_name, char *function_name, size_t n)
-{
-	printf(BLUE"TEST NAME:"PURPLE" %s\n\n"RESET, function_name);
-	ft_strlcpy(test_file_name,"test_results/",n);
-	ft_strlcat(test_file_name, function_name, n);
-	ft_strlcat(test_file_name, "_test_results", n);
-	remove_file(test_file_name);
-	return (test_file_name);
-}
 
 int    compare_results(char *file_name, int c, int index_test,int (*result)(int), int	(*expected)(int))
 {
@@ -320,20 +310,6 @@ void loop_through_tests_strl(char **tests_values, char *function_name, size_t(*r
 	print_result_with_test(i, final_result);
 }
 
-
-int	my_strcmp(char *s1, char *s2)
-{
-	if (s1 == NULL && s2 == NULL)
-		return (0);
-	if ((s1 == NULL && s2 != NULL) || (s2 == NULL && s1 != NULL))
-		return (-1);
-	while (*s1 && *s2 && (*s1 == *s2))
-	{
-		s1++;
-		s2++;
-	}
-	return (unsigned char)*s1 - (unsigned char)*s2;
-}
 
 int    compare_results_strchr(char *file_name, char c,int index_test, char *(*result)(const char *, int c), char *(*expected)(const char *, int c))
 {
@@ -674,14 +650,3 @@ void loop_through_tests_strdup(char **tests_values, char *function_name, char *(
 // 	return (final_result);
 // }
 
-void	check(int test, size_t *index, size_t *final_result)
-{
-	if (test == 0)
-		printf(WHITE" #"BLUE"%ld-"RED"%s"RESET, *index,KO);
-	else
-	{
-		*final_result += 1;
-		printf(WHITE" #"BLUE"%ld-"GREEN"%s"RESET, *index,OK);
-	}
-	*index += 1;
-}

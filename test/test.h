@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/21 11:46:07 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/21 16:51:41 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void print_result_with_test(size_t total, size_t success_results);
 void	check(int test, size_t *index, size_t *final_result);
 char	*print_function_name(char *test_file_name, char *function_name, size_t n);
 int	my_strcmp(char *s1, char *s2);
+void	check_list(t_list *list, char **result_values, size_t *i, size_t *final_result, char *function_name);
 #endif
