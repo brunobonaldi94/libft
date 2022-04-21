@@ -6,7 +6,7 @@
 /*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/08 18:14:20 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/11 23:31:10 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/21 00:21:51 by bbonaldi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	void					*calloc_result;
 	long long unsigned int	result;
 
-	if ((nmemb + size) < nmemb)
-		return (NULL);
 	result = nmemb * size;
+	if (nmemb != 0 && result / nmemb != size)
+		return (NULL);
 	calloc_result = malloc(result);
 	if (calloc_result == NULL)
 		return (NULL);
