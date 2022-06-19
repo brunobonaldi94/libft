@@ -49,6 +49,8 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 NAME = libft.a
 INCLUDES = ./
 
+NAME_BONUS = libft_bonus.a
+
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
@@ -65,15 +67,18 @@ $(NAME):	$(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	$(RANLIB) $(NAME)
 
-bonus:	$(OBJS_BONUS)
-	$(AR) $(NAME) $(OBJS_BONUS) 
-	$(RANLIB) $(NAME)
+$(NAME_BONUS):	$(OBJS_BONUS) $(OBJS)
+	$(AR) $(NAME_BONUS) $(OBJS_BONUS) $(OBJS)
+	$(RANLIB) $(NAME_BONUS)
+	\cp -r $(NAME_BONUS) $(NAME)
+
+bonus: $(NAME_BONUS)
 
 clean:
 	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean:	clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_BONUS)
 
 re:	fclean all
 

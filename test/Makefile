@@ -5,7 +5,7 @@ MANDATORY = isalpha isascii isdigit isalnum isprint tolower toupper strlen memse
 OBJS = $(SRCS:%.c=%.o)
 BONUS = lstnew lstadd_front lstlast lstadd_back lstdelone lstclear lstiter lstmap
 #PARENT_DIR		= $(shell dirname $(shell pwd))
-PARENT_DIR = /media/brunobonaldi/Seagate Expansion Drive/Programming-Study/42 Sao Paulo/42projects/00-libft/libft
+PARENT_DIR =  $(shell dirname $(shell pwd))
 LIBFT_PATH		= $(PARENT_DIR)
 
 HELPERS_PATH = helpers/

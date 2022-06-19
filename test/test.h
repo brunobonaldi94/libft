@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bbonaldi <bbonaldi@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: coder <coder@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 23:50:06 by bbonaldi          #+#    #+#             */
-/*   Updated: 2022/04/21 16:51:41 by bbonaldi         ###   ########.fr       */
+/*   Updated: 2022/04/26 23:42:51 by coder            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 #define CYAN "\033[0;36m"
 #define WHITE "\033[0;37m"
 
-#include <criterion/criterion.h>
 #include <signal.h>
 #include <ctype.h>
 #include "../libft.h"
